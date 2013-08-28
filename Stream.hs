@@ -36,3 +36,9 @@ sfoldl g v0 (Stream next s) = go v0 s where
     Done -> acc
     Skip s' _ -> go acc s'
     Yield s' v -> go (g acc v) s'
+    
+snats :: Int -> Stream Int
+snats n = Stream next 0 where
+  next p | p <= n = let p' = p+1         
+                    in Yield p' p'
+         | otherwise = Done
